@@ -30,7 +30,7 @@ namespace Entities.Models
         public int? RoleId {  get; set; }
         public Role? Role {  get; set; }
         [Column("pub_id")]
-        public int? PubId {  get; set; }
+        public int? PublisherId {  get; set; }
         public Publisher? Publisher { get; set; }
         [Column("hire_date")]
         public DateTime? HireDate { get; set; }
