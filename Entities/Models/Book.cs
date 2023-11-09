@@ -19,7 +19,7 @@ namespace Entities.Models
         [Column("type")]
         public string? Type { get; set; }
         [Column("pub_id")]
-        public int? PubId { get; set; }
+        public int? PublisherId { get; set; }
         public Publisher? Publisher { get; set; }
         [Column("price")]
         public decimal? Price {  get; set; }

@@ -1,5 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DAO;
+using Entities.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OData.Edm;
+using Microsoft.OData.ModelBuilder;
 using Repositories;
+using System.Diagnostics;
+using System.Reflection.Emit;
 
 
 namespace BookStoreAPI.Extensions
@@ -20,6 +26,15 @@ namespace BookStoreAPI.Extensions
         });
         public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) => services.AddDbContext<BookstoreDbContext>(opts
            => opts.UseSqlServer(configuration.GetConnectionString("sqlConnection"),b => b.MigrationsAssembly("BookStoreAPI")));
+        public static void ConfigureRepositoryManager(this IServiceCollection services) => services.AddScoped<IRepositoryManager, RepositoryManager>();
+        public static IEdmModel GetEdmModel()
+        {
+            ODataConventionModelBuilder modelBuilder = new ODataConventionModelBuilder();
+            modelBuilder.EntitySet<Book>("Books");
+            modelBuilder.EntitySet<Author>("Authors");
+            return modelBuilder.GetEdmModel();
+        }
+        public static void ConfigureDAOManager(this IServiceCollection services) => services.AddScoped<IDAOManager, DAOManager>(); 
 
     }
 }

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories
+namespace DAO
 {
-    public interface IRepositoryManager
+    public interface IDAOManager
     {
-        IBookRepository Book { get; }
-        void Save();
+        IBookDAO BookDAO { get; }
+
     }
 }
