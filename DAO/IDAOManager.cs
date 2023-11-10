@@ -9,6 +9,6 @@ namespace DAO
     public interface IDAOManager
     {
         IBookDAO BookDAO { get; }
-
+        IAuthorDAO AuthorDAO { get; }
     }
 }

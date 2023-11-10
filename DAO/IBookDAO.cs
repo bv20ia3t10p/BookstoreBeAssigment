@@ -13,5 +13,6 @@ namespace DAO
         BookDTO GetBook(int id, bool trackChanges);
         void DeleteBook(int id, bool trackChanges);
         BookDTO CreateBook(int id,CreateBookDTO bookToCreate);
+        BookDTO UpdateBook(int id, CreateBookDTO bookToUpdate, bool trackChanges);
     }
 }

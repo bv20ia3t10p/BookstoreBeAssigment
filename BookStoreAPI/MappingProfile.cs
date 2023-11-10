@@ -11,6 +11,10 @@ namespace BookStoreAPI
             CreateMap<Book, BookDTO>();
             CreateMap<Book, BookDTO>().ReverseMap();
             CreateMap<CreateBookDTO, Book>();
+            CreateMap<Author, AuthorDTO>();
+            CreateMap<Author, AuthorDTO>().ReverseMap();
+            CreateMap<CreateAuthorDTO, AuthorDTO>();
+
         }
     }
 }

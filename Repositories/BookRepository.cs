@@ -11,7 +11,7 @@ namespace Repositories
     {
         public BookRepository(BookstoreDbContext context) : base(context) { }
         public IEnumerable<Book>GetBooks(bool trackChanges) => GetAll(trackChanges).OrderBy(e=>e.Id).ToList();
-        public Book GetBook(int id, bool trackChanges) => GetByCondition(e => e.Id.Equals(id), trackChanges).SingleOrDefault();
+        public Book GetBook(int id, bool trackChanges) => GetByCondition(e => e.Id == id, trackChanges).SingleOrDefault();
         public void DeleteBook(Book book) => Delete(book);
         public void CreateBook(Book book) => Create(book);
     }

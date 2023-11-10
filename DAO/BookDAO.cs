@@ -51,5 +51,15 @@ namespace DAO
             var returnBook = _mapper.Map<BookDTO>(newBookEntity);
             return returnBook;
         }
+        public BookDTO UpdateBook (int id, CreateBookDTO bookToUpdate,bool trackChanges)
+        {
+            var book = _repository.Book.GetBook(id, trackChanges);
+            if (book is null)
+            {
+                throw new Exception("Book not found");
+            }
+            _mapper.Map(bookToUpdate, book);
+            _repository.Save();
+            return _mapper.Map<BookDTO>(book);        }
     }
 }
