@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DAO.Contracts;
 using Entities.DTO;
 using Entities.Models;
 using Repositories;
@@ -43,7 +44,7 @@ namespace DAO
             _repository.Book.DeleteBook(book);
             _repository.Save();
         }
-        public BookDTO CreateBook (int id, CreateBookDTO bookToCreate)
+        public BookDTO CreateBook ( CreateBookDTO bookToCreate)
         {
             var newBookEntity = _mapper.Map<Book>(bookToCreate);
             _repository.Book.CreateBook(newBookEntity);
@@ -51,15 +52,14 @@ namespace DAO
             var returnBook = _mapper.Map<BookDTO>(newBookEntity);
             return returnBook;
         }
-        public BookDTO UpdateBook (int id, CreateBookDTO bookToUpdate,bool trackChanges)
+        public BookDTO UpdateBook ( int id, CreateBookDTO bookToUpdate,bool trackChanges)
         {
-            var book = _repository.Book.GetBook(id, trackChanges);
-            if (book is null)
-            {
-                throw new Exception("Book not found");
-            }
-            _mapper.Map(bookToUpdate, book);
+            var bookInDB = _repository.Book.GetBook(id,trackChanges);
+            if (bookInDB == null) throw new Exception("Book not found");
+            _mapper.Map(bookToUpdate, bookInDB);
             _repository.Save();
-            return _mapper.Map<BookDTO>(book);        }
+            var returnBook = _mapper.Map<BookDTO>(bookInDB);
+            return returnBook;
+        }
     }
 }

@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories
+namespace Repositories.Contracts
 {
     public interface IAuthorRepository
     {
-        Author GetAuthor(int id,bool trackChanges);
+        Author GetAuthor(int id, bool trackChanges);
         IEnumerable<Author> GetAuthors(bool trackChanges);
         void CreateAuthor(Author author);
         void DeleteAuthor(Author author);

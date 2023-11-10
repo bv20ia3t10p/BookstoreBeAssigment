@@ -11,10 +11,13 @@ builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureDAOManager();
+
 builder.Services.AddControllers().AddOData(option => option.Select().Filter().Count().OrderBy().Expand().SetMaxTop(100).AddRouteComponents("odata", ServiceExtensions.GetEdmModel()));
-
+builder.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();
 var app = builder.Build();
-
+app.UseSwagger();
+app.UseSwaggerUI();
 // Configure the HTTP request pipeline.
 app.UseODataBatching();
 app.UseHttpsRedirection();

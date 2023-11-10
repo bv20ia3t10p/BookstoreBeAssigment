@@ -12,7 +12,7 @@ namespace DAO
         IEnumerable<BookDTO> GetBooks(bool trackChanges);
         BookDTO GetBook(int id, bool trackChanges);
         void DeleteBook(int id, bool trackChanges);
-        BookDTO CreateBook(int id,CreateBookDTO bookToCreate);
-        BookDTO UpdateBook(int id, CreateBookDTO bookToUpdate, bool trackChanges);
+        BookDTO CreateBook(CreateBookDTO bookToCreate);
+        BookDTO UpdateBook(int id, CreateBookDTO bookToUpdate,bool trackChanges);
     }
 }

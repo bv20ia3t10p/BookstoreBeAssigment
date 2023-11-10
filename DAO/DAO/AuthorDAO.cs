@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using DAO.Contracts;
 using Entities.DTO;
 using Entities.Models;
 using Repositories;
+using Repositories.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;

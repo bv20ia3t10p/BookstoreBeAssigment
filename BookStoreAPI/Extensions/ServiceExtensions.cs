@@ -1,9 +1,11 @@
-﻿using DAO;
+﻿using DAO.Contracts;
+using DAO;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using Repositories;
+using Repositories.Contracts;
 using System.Diagnostics;
 using System.Reflection.Emit;
 
@@ -29,9 +31,12 @@ namespace BookStoreAPI.Extensions
         public static void ConfigureRepositoryManager(this IServiceCollection services) => services.AddScoped<IRepositoryManager, RepositoryManager>();
         public static IEdmModel GetEdmModel()
         {
-            ODataConventionModelBuilder modelBuilder = new ODataConventionModelBuilder();
+            ODataConventionModelBuilder modelBuilder = new();
             modelBuilder.EntitySet<Book>("Books");
             modelBuilder.EntitySet<Author>("Authors");
+            modelBuilder.EntitySet<User>("Users");
+            modelBuilder.EntitySet<Role>("Roles");
+            modelBuilder.EntitySet<BookAuthor>("BookAuthors");
             return modelBuilder.GetEdmModel();
         }
         public static void ConfigureDAOManager(this IServiceCollection services) => services.AddScoped<IDAOManager, DAOManager>(); 

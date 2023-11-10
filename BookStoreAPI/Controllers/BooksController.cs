@@ -1,4 +1,5 @@
 ﻿using DAO;
+using DAO.Contracts;
 using Entities.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
@@ -16,33 +17,31 @@ namespace BookStoreAPI.Controllers
         public IActionResult Get()
         {
             var books = _dao.BookDAO.GetBooks(trackChanges: false);
-            return (IActionResult)Ok(books);
+            return Ok(books);
         }
         [EnableQuery]
-        public IActionResult Get([FromRoute]int key) {
-            Console.WriteLine();
+        public IActionResult Get(int key)
+        {
             var book = _dao.BookDAO.GetBook(key,trackChanges: false);
             return Ok(book);
         }
         [EnableQuery]
-        public IActionResult Post([FromRoute] int key,[FromBody] CreateBookDTO bookToCreate)
+        public IActionResult Put(int key,[FromBody] CreateBookDTO bookToUpdate)
         {
-            var book = _dao.BookDAO.CreateBook(key, bookToCreate);
-            return Ok(book);
+            var updatedBook = _dao.BookDAO.UpdateBook(key,bookToUpdate,trackChanges:true);
+            return Ok(updatedBook);
         }
         [EnableQuery]
-        public IActionResult Delete([FromRoute] int key)
+        public IActionResult Delete(int key)
         {
-            _dao.BookDAO.DeleteBook(key,trackChanges: false);
+            _dao.BookDAO.DeleteBook(key,trackChanges:false);
             return Ok();
         }
         [EnableQuery]
-        public IActionResult Put([FromRoute] int key, [FromBody]  CreateBookDTO bookToPut)
+        public IActionResult Post([FromBody]CreateBookDTO bookToCreate)
         {
-            var book = _dao.BookDAO.UpdateBook(key, bookToPut, trackChanges: true);
-            return Ok(book);
+            var createdBook = _dao.BookDAO.CreateBook(bookToCreate);
+            return Ok(createdBook);
         }
-
-
     }
 }

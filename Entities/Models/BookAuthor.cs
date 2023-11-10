@@ -12,9 +12,11 @@ namespace Entities.Models
     [PrimaryKey(nameof(AuthorId),nameof(BookId))]
     public class BookAuthor
     {
+        [Key]
         [Column("author_id")]
         public int AuthorId {  get; set; }
         public Author? Author { get; set; }
+        [Key]
         [Column("book_id")]
         public int BookId {  get; set; }
         public Book? Book { get; set; }
